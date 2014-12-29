@@ -1,29 +1,30 @@
 {
-  "name": "node-js-sample",
+  "name": "poro-cv",
   "version": "0.1.0",
-  "description": "A sample Node.js app using Express 4",
+  "description": "Uses OpenCV with a trained cascade classifier to identify Poros",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.0.0"
+    "express": "^4.0.0",
+    "opencv": "1.0.0",
+    "jade": "1.8.x"
   },
   "engines": {
     "node": "0.10.x"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
+    "url": "https://github.com/TylerSandman/poro-cv"
   },
   "keywords": [
     "node",
-    "heroku",
-    "express"
+    "express",
+    "poro",
+    "opencv",
+    "jade"
   ],
-  "author": "Mark Pundsack",
-  "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
+  "author": "Tyler Sanderson",
   "license": "MIT"
 }
