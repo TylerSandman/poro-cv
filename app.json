@@ -1,7 +1,6 @@
 {
-  "name": "Node.js Sample",
-  "description": "A barebones Node.js app using Express 4",
-  "repository": "https://github.com/heroku/node-js-sample",
-  "logo": "http://node-js-sample.herokuapp.com/node.svg",
-  "keywords": ["node", "express", "static"]
+  "name": "Poro CV",
+  "description": "Uses OpenCV with a trained cascade classifier to identify Poros in images",
+  "repository": "https://github.com/TylerSandman/poro-cv",
+  "keywords": ["node", "express", "poro", "jade", "opencv"]
 }
