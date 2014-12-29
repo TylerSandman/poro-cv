@@ -1,0 +1,6 @@
+{
+  "name": "Poro CV",
+  "description": "Uses OpenCV with a trained cascade classifier to identify Poros in images",
+  "repository": "https://github.com/TylerSandman/poro-cv",
+  "keywords": ["node", "express", "poro", "jade", "opencv"]
+}
