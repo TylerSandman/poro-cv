@@ -393,6 +393,17 @@ zoom:1;
 vertical-align: bottom;
 }
 
+.uploader-container{
+
+display:block;
+border:5px dashed #ddd;
+background:#fff;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+padding:5px;
+}
+
 	img.align-left, .img-wrap.align-left{float:left;margin:0 10px 5px 0;}
 	img.align-right, .img-wrap.align-right{float:right;margin:0 0 5px 10px;}
 	img.full-width{clear:both;display:block;width:100%;height:auto;margin:0 0 10px 0;}
