@@ -42,10 +42,11 @@ font-family: "Arimo", arial, verdana, sans-serif;
 	LAYOUT
 -----------------------------------*/
 body{
+height: 100%;
 margin:0;
 padding:0 0 0 0;
 color:#000;
-background:#efefef url(css/img/gray_jean.png);
+background:#fff;
 font:normal 0.9em/150% 'Arimo', arial, verdana, sans-serif;
 text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 }
@@ -53,9 +54,6 @@ text-shadow: 0 0 1px transparent; /* google font pixelation fix */
 #wrap{
 width:100%;
 background:#fff;
-margin:30px auto 30px auto;
-padding:0 2%;
-border:1px solid #ccc;
 }
 
 
@@ -152,4 +150,9 @@ padding:30px 0;
 border:5px solid #ddd;
 margin:30px 0;
 display:block;
+}
+
+.logo-container{
+	background: #ff69b4;
+	margin-top: -10px;
 }
