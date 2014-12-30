@@ -442,6 +442,18 @@ vertical-align: bottom;
 		margin:0;
 		padding:0;
 		}
+		
+		.gallery img{
+		display:inline-block;
+		position:relative;
+		border:1px solid #ddd;
+		background:#fff;
+		padding:3px;
+		margin:5px;
+		-moz-border-radius:5px;
+		-webkit-border-radius:5px;
+		border-radius:5px;
+		}
 
 /*---------------------------------
 	SLIDESHOW2
