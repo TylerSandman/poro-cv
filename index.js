@@ -1,5 +1,4 @@
 var express = require('express')
-var cv = require('opencv')
 var app = express();
 var viewPath = 'views/'
 

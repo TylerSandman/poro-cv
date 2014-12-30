@@ -1,11 +1,17 @@
 doctype html
-html(lane="en")
-    head
-        title Poro CV
-
-    body
-        h1 PoroCV
-        #container.col
-        p PoroCV!
-        p.
-            This is just some sample text.
+html
+	head
+		title HTML KickStart Elements		
+		link(rel='stylesheet', href='stylesheets/style.css')
+		link(rel='stylesheet', href='stylesheets/css/kickstart.css')
+		script(src='/javascripts/jquery.js')
+		script(src='/javascripts/kickstart.js')
+	body
+		div(class="grid")
+			div(class="col_12", style={marginTop: "100px"})
+				h1(class="center")
+					p
+						i(class="icon-fire")
+					p This example is blank!
+				h4(class="center", style={color: "999", marginBottom: "40px"}).
+					Add some HTML KickStart Elements to see the magic happen
