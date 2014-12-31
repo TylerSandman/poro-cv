@@ -1,6 +1,5 @@
 var express = require('express')
 var app = express();
-var viewPath = 'views/'
 
 app.set('port', (process.env.PORT || 8080))
 app.set('view engine', 'jade')
@@ -9,6 +8,10 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/', function(request, response) {
     response.render('index')
+})
+
+app.post('/', function(request, response) {
+	response.send("Processed!")
 })
 
 app.listen(app.get('port'), function() {

@@ -24,14 +24,15 @@ function uploadFile(file){
 	fd.append('file', file);
 	$.ajax({
         url: '/',
-        type: 'POST',
+        type: "POST",
 		processData: false,
 		contentType: false,
         success: function(data){
 			console.log("Success!");
 			console.log(data);
 		},
-        data: fd,
+        data: 'hi',
+		dataType: 'text'
     });
 }
 
