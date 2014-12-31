@@ -18,22 +18,51 @@ function loadPreview(file){
 	reader.readAsDataURL(file);
 }
 
-function uploadFile(file){
+function uploadImage(file){
 
-	var fd = new FormData();
-	fd.append('file', file);
+	var reader = new FileReader();  
+	var fd = new FormData()
+	fd.append('file', file)
 	$.ajax({
-        url: '/',
-        type: "POST",
-		processData: false,
+		url: '/process',
+		type: "POST",
 		contentType: false,
-        success: function(data){
+		success: function(data){
 			console.log("Success!");
 			console.log(data);
 		},
-        data: 'hi',
-		dataType: 'text'
-    });
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log("Error with processing request!")
+			console.log(textStatus)
+			console.log(errorThrown)
+		},
+		data: fd,
+		dataType: 'json',
+		processData: false
+	})
+}
+
+function processImage(src){
+	//Send post request with local file source to work with busboy
+	var fd = new FormData()
+	fd.append('text', src)
+	$.ajax({
+		url: '/process',
+		type: "POST",
+		contentType: false,
+		success: function(data){
+			console.log("Success!");
+			console.log(data);
+		},
+		error: function(jqXHR, textStatus, errorThrown){
+			console.log("Error with processing request!")
+			console.log(textStatus)
+			console.log(errorThrown)
+		},
+		data: fd,
+		dataType: 'json',
+		processData: false
+	})
 }
 
 //Drag and drop events
@@ -52,12 +81,13 @@ function UploaderDrop(e){
 		var src = e.originalEvent.dataTransfer.getData("src", '')
 		if (src !== ''){
 			img.attr('src', src)
+			processImage(src)
 		}
 	}
 	
 	else if (isValid(file)){
 		loadPreview(file)
-		uploadFile(file)
+		uploadImage(file)
 	}
 }
 
@@ -67,7 +97,7 @@ function InputUpload(e){
 	var file = files[0];
 	if (isValid(file)){
 		loadPreview(file)
-		uploadFile(file)
+		uploadImage(file)
 	}
 }
 
