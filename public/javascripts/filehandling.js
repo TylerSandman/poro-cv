@@ -9,15 +9,30 @@ function isValid(file){
 			(file.type === "image/jpg" || file.type === "image/png" || file.type === "image/bmp" || file.type === "image/jpeg"))
 }
 
-function loadImg(file){
+function loadPreview(file){
 
 	var reader = new FileReader();  
-	console.log(file)
 	reader.onload = function (e) {
-		console.log(e)
 		img.attr('src', e.target.result);
 	}		
 	reader.readAsDataURL(file);
+}
+
+function uploadFile(file){
+
+	var fd = new FormData();
+	fd.append('file', file);
+	$.ajax({
+        url: '/',
+        type: 'POST',
+		processData: false,
+		contentType: false,
+        success: function(data){
+			console.log("Success!");
+			console.log(data);
+		},
+        data: fd,
+    });
 }
 
 //Drag and drop events
@@ -28,10 +43,20 @@ function UploaderDragHover(e){
 
 function UploaderDrop(e){
 	UploaderDragHover(e);
-	var files = e.originalEvent.dataTransfer.files;
+	var files = e.originalEvent.dataTransfer.files;	
 	var file = files[0];
-	if (isValid(file)){
-		loadImg(file)
+	
+	//Not uploaded
+	if (!file){
+		var src = e.originalEvent.dataTransfer.getData("src", '')
+		if (src !== ''){
+			img.attr('src', src)
+		}
+	}
+	
+	else if (isValid(file)){
+		loadPreview(file)
+		uploadFile(file)
 	}
 }
 
@@ -40,7 +65,8 @@ function InputUpload(e){
 	var files = e.target.files;
 	var file = files[0];
 	if (isValid(file)){
-		loadImg(file)
+		loadPreview(file)
+		uploadFile(file)
 	}
 }
 
@@ -53,4 +79,7 @@ uploader.on("dragover", UploaderDragHover);
 uploader.on("dragleave", UploaderDragHover);
 uploader.on("drop", UploaderDrop);
 fileInput.on("change", InputUpload);
+$("img").on("dragstart", function(e){
+	e.originalEvent.dataTransfer.setData("src", e.target.src)
+})
 })
