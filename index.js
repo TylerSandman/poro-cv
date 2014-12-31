@@ -1,13 +1,30 @@
 var express = require('express')
 var busboy = require('connect-busboy')
 var fs = require('fs')
-var app = express();
+var cv = require('opencv')
+var app = express()
 
 app.set('port', (process.env.PORT || 8080))
 app.set('view engine', 'jade')
 app.set('views', (__dirname + '/views'))
 app.use(express.static(__dirname + '/public'))
 app.use(busboy())
+
+var cascadeFile = __dirname + '/public/banana_classifier.xml'
+
+function detectPoro(request, response, path){
+    cv.readImage(path , function(err, im){
+        im.detectObject(cascadeFile, {neighbors: 2, scale: 2}, function(err, objects){
+            var detected = false
+            console.log(objects)
+            if (objects.length > 0){
+                detected = true
+            }
+            response.writeHead(200, { "Connection": "close" })
+            response.end(JSON.stringify({"detected" : detected}))
+        })
+    })
+}
 
 app.get('/', function(request, response) {
     response.render('index')
@@ -24,9 +41,7 @@ app.post('/process', function(request, response) {
 		file.pipe(fstream)
 		fstream.on('close', function(){
 			console.log("Processing: " + filename)
-			response.writeHead(200, { 'Connection': 'close' });
-			response.end(JSON.stringify({"detected" : true}));
-			
+            detectPoro(request, response, path)
 		})
 	})
 	
@@ -35,8 +50,7 @@ app.post('/process', function(request, response) {
 	
 		if (fieldname !== 'text') return
 		console.log("Processing: " + val)
-		response.writeHead(200, { 'Connection': 'close' });
-		response.end(JSON.stringify({"detected" : true}));
+		detectPoro(request, response, __dirname + '/public/images/' + val)
 	})
 })
 
