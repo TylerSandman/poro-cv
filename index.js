@@ -1,8 +1,8 @@
 var express = require('express')
 var busboy = require('connect-busboy')
 var fs = require('fs')
-var cv = require('opencv')
-var app = express()
+var exec = require('child_process').exec
+var app = express();
 
 app.set('port', (process.env.PORT || 8080))
 app.set('view engine', 'jade')
@@ -24,6 +24,17 @@ function detectPoro(request, response, path){
             response.end(JSON.stringify({"detected" : detected}))
         })
     })
+
+function detectPoros(request, response, path){
+
+	child = exec('python /home/ubuntu/poro-cv/public/recognizer.py ' + path,
+	function (error, stdout, stderr) {
+		if (error !== null) {
+			console.log('exec error: ' + error);
+		}
+		response.writeHead(200, { 'Connection': 'close' });
+		response.end(stdout);
+});
 }
 
 app.get('/', function(request, response) {
@@ -41,7 +52,7 @@ app.post('/process', function(request, response) {
 		file.pipe(fstream)
 		fstream.on('close', function(){
 			console.log("Processing: " + filename)
-            detectPoro(request, response, path)
+			detectPoros(request, response, path)
 		})
 	})
 	
@@ -50,7 +61,7 @@ app.post('/process', function(request, response) {
 	
 		if (fieldname !== 'text') return
 		console.log("Processing: " + val)
-		detectPoro(request, response, __dirname + '/public/images/' + val)
+		detectPoros(request, response, val)
 	})
 })
 
