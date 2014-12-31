@@ -23,6 +23,7 @@ function uploadImage(file){
 	var reader = new FileReader();  
 	var fd = new FormData()
 	fd.append('file', file)
+	uploader.addClass('spinner')
 	$.ajax({
 		url: '/process',
 		type: "POST",
@@ -30,11 +31,13 @@ function uploadImage(file){
 		success: function(data){
 			console.log("Success!");
 			console.log(data);
+			uploader.removeClass('spinner')
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Error with processing request!")
 			console.log(textStatus)
 			console.log(errorThrown)
+			uploader.removeClass('spinner')
 		},
 		data: fd,
 		dataType: 'json',
@@ -46,6 +49,7 @@ function processImage(src){
 	//Send post request with local file source to work with busboy
 	var fd = new FormData()
 	fd.append('text', src)
+	uploader.addClass('spinner')
 	$.ajax({
 		url: '/process',
 		type: "POST",
@@ -53,11 +57,13 @@ function processImage(src){
 		success: function(data){
 			console.log("Success!");
 			console.log(data);
+			uploader.removeClass('spinner')
 		},
 		error: function(jqXHR, textStatus, errorThrown){
 			console.log("Error with processing request!")
 			console.log(textStatus)
 			console.log(errorThrown)
+			uploader.removeClass('spinner')
 		},
 		data: fd,
 		dataType: 'json',
