@@ -1,7 +1,7 @@
 doctype html
 html
 	head
-		title Poro CV
+		title PoroCV
 		link(rel='stylesheet', href='stylesheets/style.css')
 		link(rel='stylesheet', href='stylesheets/css/kickstart.css')
 		script(src='/javascripts/jquery.js')
@@ -10,7 +10,7 @@ html
 	body
 		#wrap
 			.logo-container.center
-				img(src="images/logo.png", alt="Poro CV")
+				img(src="images/logo.png", alt="PoroCV")
 			.row
 				.col_3
 				.col_6.center
@@ -18,25 +18,26 @@ html
 					a(href="https://github.com/TylerSandman/poro-cv", style={color: "black"})
 						i.icon-github.icon-4x			
 					p
-						| Poro CV uses 
-						a(href="http://opencv.org/") Open CV 
-						| along with a 
-						a(href="http://docs.opencv.org/doc/user_guide/ug_traincascade.html") trained cascade classifier 
-						| to recognize 
-						a(href="http://leagueoflegends.wikia.com/wiki/Poro") Poros 
-						| in images! Since there are no official Javascript bindings for OpenCV, I used 
-						a(href="https://github.com/peterbraden/node-opencv") this 
-						| Node.js binding. Keep in mind the classifier isn't perfect but generally works very well.
+						| PoroCV uses 
+						a(href="http://opencv.org/") OpenCV
+						|  along with a 
+						a(href="http://docs.opencv.org/doc/user_guide/ug_traincascade.html") trained cascade classifier
+						|  to recognize 
+						a(href="http://leagueoflegends.wikia.com/wiki/Poro") poros
+						|  in images! Since there are no official Javascript bindings for OpenCV, I used 
+						a(href="https://github.com/peterbraden/node-opencv") this
+						|  Node.js binding. Keep in mind the classifier isn't perfect but generally works very well.
 				.col_3
 			.row
 				.col_3
 				.col_6.center
 					h1 Try it Out
+					p (Drag and drop images or click to upload)
 					input#input1(type="file", style={display: "none"})
 					.uploader-container.center
 						#uploader
 							img#uploaded-img(src="images/examples/positive1.jpg")
-					h4 Example Images
+					h6#result-text This image contains a poro! Look at the cute little guy.
 					.gallery
 						-var n = 1
 						while n <= 6	
@@ -44,6 +45,7 @@ html
 						- n = 1
 						while n <=4
 							img(src="images/examples/negative" + n++ + ".jpg", width="100px", height="100px", draggable="true")
+					
 				.col_3
 			.row
 				.col_12.center					
