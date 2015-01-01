@@ -1,8 +1,18 @@
 $(document).ready(function(){
-var uploader = $("#uploader");
-var fileInput = $("#input1");
-var img = $("#uploaded-img");
+var uploader = $("#uploader")
+var fileInput = $("#input1")
+var img = $("#uploaded-img")
+var resultText = $("#result-text")
 
+function updateResultText(detected){
+	if (detected){
+	    resultText.text("I see a poro! Look at the cute little guy.")
+	}
+	else{
+        resultText.text("I don't see any poros in this image...")
+    }
+
+}
 function isValid(file){
 	//Less than 2MB and valid formats
 	return ((file.size / 1048576 < 2) &&
@@ -11,11 +21,11 @@ function isValid(file){
 
 function loadPreview(file){
 
-	var reader = new FileReader();  
+	var reader = new FileReader() 
 	reader.onload = function (e) {
-		img.attr('src', e.target.result);
-	}		
-	reader.readAsDataURL(file);
+		img.attr('src', e.target.result)
+	}
+	reader.readAsDataURL(file)
 }
 
 function uploadImage(file){
@@ -29,8 +39,8 @@ function uploadImage(file){
 		type: "POST",
 		contentType: false,
 		success: function(data){
-			console.log("Success!");
-			console.log(data);
+			console.log("Success!")
+			updateResultText(data.detected)
 			uploader.removeClass('spinner')
 		},
 		error: function(jqXHR, textStatus, errorThrown){
@@ -55,8 +65,8 @@ function processImage(src){
 		type: "POST",
 		contentType: false,
 		success: function(data){
-			console.log("Success!");
-			console.log(data);
+			console.log("Success!")
+			updateResultText(data.detected)
 			uploader.removeClass('spinner')
 		},
 		error: function(jqXHR, textStatus, errorThrown){

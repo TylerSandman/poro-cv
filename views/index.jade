@@ -26,7 +26,7 @@ html
 						a(href="http://leagueoflegends.wikia.com/wiki/Poro") poros
 						|  in images! Since there are no official Javascript bindings for OpenCV, I used 
 						a(href="https://github.com/peterbraden/node-opencv") this
-						|  Node.js binding. Keep in mind the classifier isn't perfect but generally works very well.
+						|  Node.js binding. Keep in mind the classifier isn't perfect (i.e. considerable amount of false positives).
 				.col_3
 			.row
 				.col_3
@@ -37,7 +37,7 @@ html
 					.uploader-container.center
 						#uploader
 							img#uploaded-img(src="images/examples/positive1.jpg")
-					h6#result-text This image contains a poro! Look at the cute little guy.
+					h6#result-text I see a poro! Look at the cute little guy.
 					.gallery
 						-var n = 1
 						while n <= 6	
