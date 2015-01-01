@@ -85,9 +85,10 @@ function UploaderDrop(e){
 	//Not uploaded
 	if (!file){
 		var src = e.originalEvent.dataTransfer.getData("src", '')
+		var name = e.originalEvent.dataTransfer.getData("name")
 		if (src !== ''){
 			img.attr('src', src)
-			processImage(src)
+			processImage("/home/ubuntu/poro-cv/public/images/examples/" + name)
 		}
 	}
 	
@@ -117,6 +118,10 @@ uploader.on("dragleave", UploaderDragHover);
 uploader.on("drop", UploaderDrop);
 fileInput.on("change", InputUpload);
 $("img").on("dragstart", function(e){
-	e.originalEvent.dataTransfer.setData("src", e.target.src)
+	var src = e.target.src
+	var name = src.split("/")
+	name = name[name.length-1]
+	e.originalEvent.dataTransfer.setData("src", src)
+	e.originalEvent.dataTransfer.setData("name", name)
 })
 })

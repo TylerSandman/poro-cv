@@ -41,7 +41,7 @@ def main(argv):
                         print "Scale: " + str(1 + i*0.05) + " , minNeighbours: " + str(j) + " , minSize: " + str(k)
         '''
     img = cv2.imread(path, cv2.CV_LOAD_IMAGE_COLOR)
-    rects = cclassifier.detectMultiScale(img, scaleFactor=1.2, minNeighbors=2)
+    rects = cclassifier.detectMultiScale(img, scaleFactor=1.1, minNeighbors=5, minSize=(25, 25))
     if (len(rects) > 0):
         detected = True
     else:

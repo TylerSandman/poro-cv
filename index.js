@@ -10,16 +10,19 @@ app.set('views', (__dirname + '/views'))
 app.use(express.static(__dirname + '/public'))
 app.use(busboy())
 
+var cascadeFile = __dirname + '/public/banana_classifier.xml'
+
 function detectPoros(request, response, path){
 
-	child = exec('python /home/ubuntu/poro-cv/public/recognizer.py ' + path,
+	exec('python /home/ubuntu/poro-cv/public/recognizer.py ' + path,
 	function (error, stdout, stderr) {
+		console.log("Given path: " + path)
 		if (error !== null) {
-			console.log('exec error: ' + error);
+			console.log('exec error: ' + error)
 		}
-		response.writeHead(200, { 'Connection': 'close' });
-		response.end(stdout);
-});
+		response.writeHead(200, { 'Connection': 'close' })
+		response.end(stdout)
+	})
 }
 
 app.get('/', function(request, response) {
@@ -38,7 +41,6 @@ app.post('/process', function(request, response) {
 		fstream.on('close', function(){
 			console.log("Processing: " + filename)
 			detectPoros(request, response, path)
-			
 		})
 	})
 	
