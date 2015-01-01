@@ -1,52 +1,52 @@
 doctype html
 html
-	head
-		title PoroCV
-		link(rel='stylesheet', href='stylesheets/style.css')
-		link(rel='stylesheet', href='stylesheets/css/kickstart.css')
-		script(src='/javascripts/jquery.js')
-		script(src='/javascripts/kickstart.js')
-		script(src='/javascripts/filehandling.js')
-	body
-		#wrap
-			.logo-container.center
-				img(src="images/logo.png", alt="PoroCV")
-			.row
-				.col_3
-				.col_6.center
-					h1 About
-					a(href="https://github.com/TylerSandman/poro-cv", style={color: "black"})
-						i.icon-github.icon-4x			
-					p
-						| PoroCV uses 
-						a(href="http://opencv.org/") OpenCV
-						|  along with a 
-						a(href="http://docs.opencv.org/doc/user_guide/ug_traincascade.html") trained cascade classifier
-						|  to recognize 
-						a(href="http://leagueoflegends.wikia.com/wiki/Poro") poros
-						|  in images! Keep in mind the classifier isn't perfect (i.e. considerable amount of false positives).
-				.col_3
-			.row
-				.col_3
-				.col_6.center
-					h1 Try it Out
-					p (Drag and drop images or click to upload)
-					input#input1(type="file", style={display: "none"})
-					.uploader-container.center
-						#uploader
-							img#uploaded-img(src="images/examples/positive1.jpg")
-					h6#result-text I see a poro! Look at the cute little guy.
-					.gallery
-						-var n = 1
-						while n <= 6	
-							img(src="images/examples/positive" + n++ + ".jpg", width="100px", height="100px", draggable="true")
-						- n = 1
-						while n <=4
-							img(src="images/examples/negative" + n++ + ".jpg", width="100px", height="100px", draggable="true")
-					
-				.col_3
-			.row
-				.col_12.center					
-					#footer
-						p.
-							Developed and maintained by Tyler Sanderson
+    head
+        title PoroCV
+        link(rel='stylesheet', href='stylesheets/style.css')
+        link(rel='stylesheet', href='stylesheets/css/kickstart.css')
+        script(src='/javascripts/jquery.js')
+        script(src='/javascripts/kickstart.js')
+        script(src='/javascripts/filehandling.js')
+    body
+        #wrap
+            .logo-container.center
+                img(src="images/logo.png", alt="PoroCV")
+            .row
+                .col_3
+                .col_6.center
+                    h1 About
+                    a(href="https://github.com/TylerSandman/poro-cv", style={color: "black"})
+                        i.icon-github.icon-4x           
+                    p
+                        | PoroCV uses 
+                        a(href="http://opencv.org/") OpenCV
+                        |  along with a 
+                        a(href="http://docs.opencv.org/doc/user_guide/ug_traincascade.html") trained cascade classifier
+                        |  to recognize 
+                        a(href="http://leagueoflegends.wikia.com/wiki/Poro") poros
+                        |  in images! Keep in mind the classifier isn't perfect (i.e. considerable amount of false positives).
+                .col_3
+            .row
+                .col_3
+                .col_6.center
+                    h1 Try it Out
+                    p (Drag and drop images or click to upload)
+                    input#input1(type="file", style={display: "none"})
+                    .uploader-container.center
+                        #uploader
+                            img#uploaded-img(src="images/examples/positive1.jpg")
+                    h6#result-text I see a poro! Look at the cute little guy.
+                    .gallery
+                        -var n = 1
+                        while n <= 6    
+                            img(src="images/examples/positive" + n++ + ".jpg", width="100px", height="100px", draggable="true")
+                        - n = 1
+                        while n <=4
+                            img(src="images/examples/negative" + n++ + ".jpg", width="100px", height="100px", draggable="true")
+                    
+                .col_3
+            .row
+                .col_12.center                  
+                    #footer
+                        p.
+                            Developed and maintained by Tyler Sanderson
