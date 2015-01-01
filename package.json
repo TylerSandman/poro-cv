@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "express": "^4.0.0",
-    "opencv": "1.0.0",
+    "connect-busboy": "*",
+    "fs": "*",
     "jade": "1.8.x"
   },
   "engines": {
