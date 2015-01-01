@@ -12,29 +12,17 @@ app.use(busboy())
 
 var cascadeFile = __dirname + '/public/banana_classifier.xml'
 
-function detectPoro(request, response, path){
-    cv.readImage(path , function(err, im){
-        im.detectObject(cascadeFile, {neighbors: 2, scale: 2}, function(err, objects){
-            var detected = false
-            console.log(objects)
-            if (objects.length > 0){
-                detected = true
-            }
-            response.writeHead(200, { "Connection": "close" })
-            response.end(JSON.stringify({"detected" : detected}))
-        })
-    })
-
 function detectPoros(request, response, path){
 
-	child = exec('python /home/ubuntu/poro-cv/public/recognizer.py ' + path,
+	exec('python /home/ubuntu/poro-cv/public/recognizer.py ' + path,
 	function (error, stdout, stderr) {
+		console.log("Given path: " + path)
 		if (error !== null) {
-			console.log('exec error: ' + error);
+			console.log('exec error: ' + error)
 		}
-		response.writeHead(200, { 'Connection': 'close' });
-		response.end(stdout);
-});
+		response.writeHead(200, { 'Connection': 'close' })
+		response.end(stdout)
+	})
 }
 
 app.get('/', function(request, response) {
