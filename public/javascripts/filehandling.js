@@ -1,39 +1,48 @@
 $(document).ready(function(){
-var uploader = $("#uploader")
-var fileInput = $("#input1")
-var img = $("#uploaded-img")
-var resultText = $("#result-text")
+var uploader = $("#uploader");
+var fileInput = $("#input1");
+var img = $("#uploaded-img");
+var resultText = $("#result-text");
 
 function updateResultText(detected){
 	if (detected){
-	    resultText.text("I see a poro! Look at the cute little guy.")
+	    resultText.text("I see a poro! Look at the cute little guy.");
 	}
 	else{
-        resultText.text("I don't see any poros in this image...")
+            resultText.text("I don't see any poros in this image...");
     }
 
 }
 function isValid(file){
-	//Less than 2MB and valid formats
-	return ((file.size / 1048576 < 2) &&
-			(file.type === "image/jpg" || file.type === "image/png" || file.type === "image/bmp" || file.type === "image/jpeg"))
+
+    //Less than 2MB 
+    var validSize = (file.size / 1048576 < 2);
+
+    //Valid formats
+    var validFormat = 
+        ((file.type === "image/jpg")||
+         (file.type === "image/jpeg")||
+         (file.type === "image/png")||
+         (file.type === "image/bmp"));
+
+	return (validSize && validFormat);
 }
 
 function loadPreview(file){
 
-	var reader = new FileReader() 
+	var reader = new FileReader(); 
 	reader.onload = function (e) {
-		img.attr('src', e.target.result)
+		img.attr('src', e.target.result);
 	}
-	reader.readAsDataURL(file)
+	reader.readAsDataURL(file);
 }
 
 function uploadImage(file){
 
 	var reader = new FileReader();  
-	var fd = new FormData()
-	fd.append('file', file)
-	uploader.addClass('spinner')
+	var fd = new FormData();
+	fd.append('file', file);
+	uploader.addClass('spinner');
 	$.ajax({
 		url: '/process',
 		type: "POST",
@@ -52,14 +61,14 @@ function uploadImage(file){
 		data: fd,
 		dataType: 'json',
 		processData: false
-	})
+	});
 }
 
 function processImage(src){
 	//Send post request with local file source to work with busboy
-	var fd = new FormData()
-	fd.append('text', src)
-	uploader.addClass('spinner')
+	var fd = new FormData();
+	fd.append('text', src);
+	uploader.addClass('spinner');
 	$.ajax({
 		url: '/process',
 		type: "POST",
@@ -78,7 +87,7 @@ function processImage(src){
 		data: fd,
 		dataType: 'json',
 		processData: false
-	})
+	});
 }
 
 //Drag and drop events
@@ -94,17 +103,17 @@ function UploaderDrop(e){
 	
 	//Not uploaded
 	if (!file){
-		var src = e.originalEvent.dataTransfer.getData("src", '')
-		var name = e.originalEvent.dataTransfer.getData("name")
+		var src = e.originalEvent.dataTransfer.getData("src", '');
+		var name = e.originalEvent.dataTransfer.getData("name");
 		if (src !== ''){
-			img.attr('src', src)
-			processImage("/home/ubuntu/poro-cv/public/images/examples/" + name)
+			img.attr('src', src);
+			processImage("/home/ubuntu/poro-cv/public/images/examples/" + name);
 		}
 	}
 	
 	else if (isValid(file)){
-		loadPreview(file)
-		uploadImage(file)
+		loadPreview(file);
+		uploadImage(file);
 	}
 }
 
@@ -113,8 +122,8 @@ function InputUpload(e){
 	var files = e.target.files;
 	var file = files[0];
 	if (isValid(file)){
-		loadPreview(file)
-		uploadImage(file)
+		loadPreview(file);
+		uploadImage(file);
 	}
 }
 
@@ -128,10 +137,10 @@ uploader.on("dragleave", UploaderDragHover);
 uploader.on("drop", UploaderDrop);
 fileInput.on("change", InputUpload);
 $("img").on("dragstart", function(e){
-	var src = e.target.src
-	var name = src.split("/")
-	name = name[name.length-1]
-	e.originalEvent.dataTransfer.setData("src", src)
-	e.originalEvent.dataTransfer.setData("name", name)
-})
-})
+	var src = e.target.src;
+	var name = src.split("/");
+	name = name[name.length-1];
+	e.originalEvent.dataTransfer.setData("src", src);
+	e.originalEvent.dataTransfer.setData("name", name);
+});
+});
