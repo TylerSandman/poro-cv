@@ -19,9 +19,13 @@ function detectPoros(request, response, path){
 		if (error !== null) {
 			console.log('exec error: ' + error);
 		}
-        fs.unlink(path);
-		response.writeHead(200, { 'Connection': 'close' });
-		response.end(stdout);
+        //Remove all uploads
+        var split = path.split("/");
+        if (split[split.length-2] === "uploads"){
+            fs.unlink(path);
+        }
+	    response.writeHead(200, { 'Connection': 'close' });
+	    response.end(stdout);
 	});
 }
 
